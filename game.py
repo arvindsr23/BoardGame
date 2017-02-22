@@ -9,16 +9,10 @@ class main:
         else:
             return True
 
-    def initPrint(plyrObj):
-
-        print(plyrObj.name)
-        print(plyrObj.score)
-        print(plyrObj.count)
-
-
     plyrList = []
     numpl = int(input("How many Players ?"))
     num = person.player.numPlayer(numpl)
+
     for i in range(0, num):
         playerNames = input("Enter each person's name:")
         if isBlank(playerNames) is True:
@@ -34,12 +28,16 @@ class main:
     while (plyrList[plIndex].score < 100):
         indScore = dice.dice.dice(0)
         plyrList[plIndex].score = plyrList[plIndex].score + indScore
+        if plyrList[plIndex].score >= 100:
+            print(plyrList[plIndex].name,"wins! with a",plyrList[plIndex].score)
+            break
         print("Name: %s" % plyrList[plIndex].name, "Score: %d" % plyrList[plIndex].score)
         print ("plIndex %d" % plIndex, "num %d" % num)
         if plIndex == num-1:
             plIndex = 0
         else:
             plIndex += 1
+        diceReady = input(plyrList[plIndex].name)
 
 
 
