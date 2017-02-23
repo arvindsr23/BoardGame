@@ -1,5 +1,11 @@
 import person
 import dice
+import pymongo
+
+from pymongo import MongoClient
+client = MongoClient('mongodb://localhost:27017')
+db = client.boardGame
+
 
 class main:
 
@@ -26,10 +32,11 @@ class main:
 
     plIndex=0
     while (plyrList[plIndex].score < 100):
+        print("*-------- Run Number: %d" % plyrList[plIndex].count, "-----*")
         indScore = dice.dice.dice(0)
         plyrList[plIndex].score = plyrList[plIndex].score + indScore
         if plyrList[plIndex].score >= 100:
-            print(plyrList[plIndex].name,"wins! with a",plyrList[plIndex].score)
+            print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score)
             break
         print("Name: %s" % plyrList[plIndex].name, "Score: %d" % plyrList[plIndex].score)
         print ("plIndex %d" % plIndex, "num %d" % num)
@@ -37,6 +44,7 @@ class main:
             plIndex = 0
         else:
             plIndex += 1
+        plyrList[plIndex].count += 1
         diceReady = input(plyrList[plIndex].name)
 
 
