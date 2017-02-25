@@ -3,9 +3,10 @@ import dice
 import pymongo
 
 from pymongo import MongoClient
-client = MongoClient('mongodb://localhost:27017')
+client = MongoClient()
 db = client.boardGame
-
+#db.playerName.insert_one({"Name":"Hello World"})
+#client.close()
 
 class main:
 
@@ -25,6 +26,8 @@ class main:
             print("Enter a proper Name")
         else:
             plyr = person.player(playerNames,0,0)
+            db.playerName.insert_one({"name":plyr.name})
+            client.close()
             plyrList.append(plyr)
 
     for i in range(0,num):
