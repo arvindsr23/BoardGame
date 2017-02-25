@@ -27,12 +27,12 @@ class main:
         else:
             plyr = person.player(playerNames,0,0)
             db.playerName.insert_one({"name":plyr.name})
-            client.close()
+            #client.close()
             plyrList.append(plyr)
 
     for i in range(0,num):
         print("Name: %s" % plyrList[i].name, "Score: %d" % plyrList[i].score, "Count: %d" % plyrList[i].count)
-
+    plyrList[0].score = 95
     plIndex=0
     while (plyrList[plIndex].score < 100):
         print("*-------- Run Number: %d" % plyrList[plIndex].count, "-----*")
@@ -40,6 +40,10 @@ class main:
         plyrList[plIndex].score = plyrList[plIndex].score + indScore
         if plyrList[plIndex].score >= 100:
             print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score)
+            db.playerName.find_one_and_update(
+                {"name":plyrList[plIndex].name},
+                {"$inc": {"wins":1}}
+            )
             break
         print("Name: %s" % plyrList[plIndex].name, "Score: %d" % plyrList[plIndex].score)
         print ("plIndex %d" % plIndex, "num %d" % num)
