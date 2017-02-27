@@ -26,7 +26,7 @@ class main:
             print("Enter a proper Name")
         else:
             plyr = person.player(playerNames,0,0)
-            db.playerName.insert_one({"name":plyr.name})
+            #db.playerName.insert_one({"name":plyr.name})
             #client.close()
             plyrList.append(plyr)
 
@@ -39,11 +39,12 @@ class main:
         indScore = dice.dice.dice(0)
         plyrList[plIndex].score = plyrList[plIndex].score + indScore
         if plyrList[plIndex].score >= 100:
-            print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score)
+            print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score,".",plyrList[plIndex].name,"has won",db.playerName.find({"name":plyrList[plIndex].name},{"wins":1})[0])
             db.playerName.find_one_and_update(
                 {"name":plyrList[plIndex].name},
                 {"$inc": {"wins":1}}
             )
+            client.close()
             break
         print("Name: %s" % plyrList[plIndex].name, "Score: %d" % plyrList[plIndex].score)
         print ("plIndex %d" % plIndex, "num %d" % num)
