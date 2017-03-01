@@ -39,11 +39,9 @@ class main:
         indScore = dice.dice.dice(0)
         plyrList[plIndex].score = plyrList[plIndex].score + indScore
         if plyrList[plIndex].score >= 100:
-            print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score,".",plyrList[plIndex].name,"has won",db.playerName.find({"name":plyrList[plIndex].name},{"wins":1})[0])
-            db.playerName.find_one_and_update(
-                {"name":plyrList[plIndex].name},
-                {"$inc": {"wins":1}}
-            )
+            for doc in db.playerName.find({"name":plyrList[plIndex].name}):
+                print(plyrList[plIndex].name,"wins! with a score of",plyrList[plIndex].score,".",plyrList[plIndex].name,"has won", doc['wins'], "games")
+            db.playerName.find_one_and_update({"name":plyrList[plIndex].name}, {"$inc": {"wins":1}})
             client.close()
             break
         print("Name: %s" % plyrList[plIndex].name, "Score: %d" % plyrList[plIndex].score)
