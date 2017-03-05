@@ -24,6 +24,7 @@ class main:
 
     player = namedtuple('player','name wins')
     doc = {}
+
     i=0
     for d in db.playerName.find():
         doc[i] = player(name=d['name'], wins=d['wins'])
