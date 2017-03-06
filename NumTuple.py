@@ -8,3 +8,7 @@ Earth = player(name = 'Earth', score = '104',count = '14')
 print(Earth.name,Earth.score,Earth.count)
 
 
+
+
+
+

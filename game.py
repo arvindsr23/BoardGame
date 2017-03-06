@@ -4,7 +4,6 @@ import pymongo
 from pymongo import MongoClient
 from collections import namedtuple
 
-
 client = MongoClient()
 db = client.boardGame
 #db.playerName.insert_one({"Name":"Hello World"})
